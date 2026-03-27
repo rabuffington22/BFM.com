@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://buffingtonfamilymedicine.com/sitemap.xml

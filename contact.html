@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Buffington Family Medicine - Keller, TX</title>
+  <meta name="description" content="Contact Buffington Family Medicine in Keller, TX. Schedule an appointment, get directions, or send us a message. Call (817) 431-9199.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#0a0a0b">
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/components.css">
+</head>
+<body>
+  <div id="header-placeholder"></div>
+
+  <section class="page-header">
+    <div class="container">
+      <span class="section-label">Get in Touch</span>
+      <h1 class="fade-in">Contact <span class="gradient-text">Us</span></h1>
+      <p class="fade-in">We'd love to hear from you. Reach out to schedule an appointment or ask a question.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="info-grid" style="gap:var(--space-4xl);">
+        <!-- CONTACT FORM -->
+        <div class="fade-in">
+          <h3 style="margin-bottom:var(--space-xl);">Send Us a Message</h3>
+          <form id="contact-form" action="/functions/contact" method="POST">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" placeholder="Your full name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555">
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="How can we help you?" required></textarea>
+            </div>
+            <p style="font-size:var(--font-size-xs);color:var(--text-muted);margin-bottom:var(--space-lg);">
+              For medical emergencies, please call 911. This form is not for urgent medical questions.
+            </p>
+            <button type="submit" class="btn btn--primary" style="width:100%;">Send Message</button>
+            <div id="form-status" class="form-status"></div>
+          </form>
+        </div>
+
+        <!-- CONTACT INFO -->
+        <div class="fade-in">
+          <h3 style="margin-bottom:var(--space-xl);">Office Information</h3>
+
+          <!-- Phone -->
+          <div class="card" style="margin-bottom:var(--space-lg);padding:var(--space-xl);">
+            <div style="display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-md);">
+              <div class="card__icon" style="margin-bottom:0;width:40px;height:40px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div>
+                <h4 style="font-size:var(--font-size-sm);">Phone</h4>
+                <a href="tel:8174319199" style="color:var(--accent);font-weight:500;">(817) 431-9199</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fax -->
+          <div class="card" style="margin-bottom:var(--space-lg);padding:var(--space-xl);">
+            <div style="display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-md);">
+              <div class="card__icon" style="margin-bottom:0;width:40px;height:40px;background:linear-gradient(135deg,#8b5cf6,#06b6d4);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 8h10M7 12h6"/></svg>
+              </div>
+              <div>
+                <h4 style="font-size:var(--font-size-sm);">Fax</h4>
+                <span style="color:var(--text-secondary);">(833) 973-3672</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Address -->
+          <div class="card" style="margin-bottom:var(--space-lg);padding:var(--space-xl);">
+            <div style="display:flex;align-items:center;gap:var(--space-md);margin-bottom:var(--space-md);">
+              <div class="card__icon" style="margin-bottom:0;width:40px;height:40px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <h4 style="font-size:var(--font-size-sm);">Address</h4>
+                <span style="color:var(--text-secondary);">121 Quest Court<br>Keller, TX 76248</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hours -->
+          <div class="card" style="padding:var(--space-xl);">
+            <h4 style="font-size:var(--font-size-sm);margin-bottom:var(--space-md);">Office Hours</h4>
+            <table class="hours-table">
+              <tr>
+                <td>Mon, Tue, Wed, Fri</td>
+                <td>7:45 AM &ndash; 5:15 PM</td>
+              </tr>
+              <tr>
+                <td>Thursday</td>
+                <td>7:45 AM &ndash; 12:30 PM</td>
+              </tr>
+              <tr>
+                <td>Sat &ndash; Sun</td>
+                <td style="color:var(--text-muted);">Closed</td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- Map -->
+          <div class="card" style="padding:0;overflow:hidden;margin-top:var(--space-lg);height:250px;">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3347.5!2d-97.229!3d32.934!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864dd5a4b8e5ef1d%3A0x4a0b9d2e7c8f5e0a!2s121+Quest+Ct%2C+Keller%2C+TX+76248!5e0!3m2!1sen!1sus!4v1"
+              width="100%"
+              height="100%"
+              style="border:0;filter:invert(90%) hue-rotate(180deg) brightness(0.95) contrast(0.9);"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+  <script src="/js/includes.js"></script>
+  <script src="/js/animations.js"></script>
+  <script src="/js/contact-form.js"></script>
+</body>
+</html>
