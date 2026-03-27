@@ -316,22 +316,50 @@
   pointer-events: none;
 }
 
+/* Animated gradient orbs */
+.hero__bg::before,
 .hero__bg::after {
   content: '';
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 800px;
-  height: 800px;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
-  filter: blur(60px);
-  animation: pulse 8s ease-in-out infinite;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0;
+  animation: heroFadeIn 1.5s ease-out forwards;
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
-  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+.hero__bg::before {
+  top: -10%;
+  left: 5%;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.35) 0%, rgba(59, 130, 246, 0.08) 40%, transparent 70%);
+  animation: orbDrift1 12s ease-in-out infinite, heroFadeIn 2s ease-out forwards;
+}
+
+.hero__bg::after {
+  bottom: -10%;
+  right: 5%;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, rgba(139, 92, 246, 0.06) 40%, transparent 70%);
+  animation: orbDrift2 14s ease-in-out infinite, heroFadeIn 2s 0.5s ease-out forwards;
+}
+
+@keyframes heroFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes orbDrift1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(150px, 80px) scale(1.15); }
+  66% { transform: translate(-80px, 120px) scale(0.9); }
+}
+
+@keyframes orbDrift2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-120px, -60px) scale(1.1); }
+  66% { transform: translate(100px, -80px) scale(1.15); }
 }
 
 .hero__content {
@@ -340,6 +368,12 @@
   max-width: 800px;
   padding: var(--space-4xl) var(--space-xl);
 }
+
+/* Stagger the hero elements on load */
+.hero__content > .fade-in:nth-child(1) { transition-delay: 200ms; }
+.hero__content > .fade-in:nth-child(2) { transition-delay: 400ms; }
+.hero__content > .fade-in:nth-child(3) { transition-delay: 600ms; }
+.hero__content > .fade-in:nth-child(4) { transition-delay: 800ms; }
 
 .hero__label {
   display: inline-flex;

@@ -1,5 +1,5 @@
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="32" height="32" rx="8" fill="url(#g)"/>
-  <text x="50%" y="55%" text-anchor="middle" dominant-baseline="central" fill="white" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="13">BFM</text>
-  <defs><linearGradient id="g" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#3b82f6"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 328.2 323.01" width="32" height="32">
+  <path fill="#659cd3" d="M152.09,69.57c96.34,0,159.32,44.01,159.32,127.44,0,23.28-5.61,43.91-16.55,62.05,20.92-27.11,33.34-60.89,33.34-97.55C328.2,72.31,254.72,0,164.09,0c-4.02,0-8.03.18-12,.46"/>
+  <polyline fill="#659cd3" points="157.51 171.12 131.66 171.12 131.66 215.87 157.82 215.87 157.82 243.37 203.31 243.37 203.31 215.87 229.45 215.87 229.45 171.12 203.31 171.12 203.31 143.62 157.51 143.62"/>
+  <path fill="#659cd3" d="M96.95,280.95c-22.48-23.8-33.7-55.62-33.7-95.49V34.16C22.74,65.27-2.59,114.68.21,169.78c4.06,79.9,68.57,145.84,149.56,152.63,24.88,2.09,48.77-1.33,70.49-9.11-9.45,2.12-19.35,3.32-29.86,3.32-39.83,0-70.99-11.88-93.44-35.66Z"/>
 </svg>

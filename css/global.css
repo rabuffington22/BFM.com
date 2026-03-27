@@ -172,9 +172,11 @@ strong {
 
 /* Stagger children */
 .stagger > .fade-in:nth-child(1) { transition-delay: 0ms; }
-.stagger > .fade-in:nth-child(2) { transition-delay: 100ms; }
-.stagger > .fade-in:nth-child(3) { transition-delay: 200ms; }
-.stagger > .fade-in:nth-child(4) { transition-delay: 300ms; }
+.stagger > .fade-in:nth-child(2) { transition-delay: 120ms; }
+.stagger > .fade-in:nth-child(3) { transition-delay: 240ms; }
+.stagger > .fade-in:nth-child(4) { transition-delay: 360ms; }
+.stagger > .fade-in:nth-child(5) { transition-delay: 480ms; }
+.stagger > .fade-in:nth-child(6) { transition-delay: 600ms; }
 
 /* ===== Utility ===== */
 .text-center { text-align: center; }
