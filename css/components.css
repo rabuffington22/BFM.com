@@ -105,6 +105,102 @@
   height: 16px;
 }
 
+/* Dropdown */
+.nav__dropdown {
+  position: relative;
+}
+
+.nav__dropdown > a {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav__dropdown-arrow {
+  transition: transform var(--duration-fast) ease;
+}
+
+.nav__dropdown:hover .nav__dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.nav__dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-top: 12px;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1001;
+  transition: opacity var(--duration-fast) ease, visibility var(--duration-fast) ease;
+}
+
+.nav__dropdown:hover .nav__dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+.nav__dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.nav__dropdown-menu a {
+  position: relative;
+  display: block;
+  padding: 10px 20px;
+  white-space: nowrap;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  transition: color var(--duration-fast) ease, background var(--duration-fast) ease;
+}
+
+.nav__dropdown-menu a:first-child {
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.nav__dropdown-menu a:last-child {
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+
+.nav__dropdown-menu a:hover {
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.05);
+}
+
+/* Mobile Sub-menus */
+.nav__mobile-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav__mobile-sub {
+  display: flex;
+  flex-direction: column;
+  padding-left: var(--space-lg);
+}
+
+.nav__mobile-sub a {
+  font-size: var(--font-size-base) !important;
+  color: var(--text-muted) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.04) !important;
+  padding: var(--space-xs) 0 !important;
+}
+
+.nav__mobile-sub a:hover {
+  color: var(--text-primary) !important;
+}
+
 /* Mobile Menu Toggle */
 .nav__toggle {
   display: none;
@@ -174,6 +270,9 @@
   }
   .nav__toggle {
     display: flex;
+  }
+  .nav__dropdown-menu {
+    display: none;
   }
 }
 
