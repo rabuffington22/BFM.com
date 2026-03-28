@@ -477,14 +477,14 @@
 .hero__label {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-sm);
-  padding: 8px 16px;
+  gap: var(--space-xs);
+  padding: 5px 12px;
   border-radius: var(--radius-full);
   border: 1px solid var(--border);
   background: var(--bg-card);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
   color: var(--text-secondary);
-  margin-bottom: var(--space-2xl);
+  margin-bottom: var(--space-xl);
 }
 
 .hero__label span {
@@ -492,6 +492,7 @@
 }
 
 .hero h1 {
+  font-size: var(--font-size-5xl);
   margin-bottom: var(--space-xl);
 }
 
