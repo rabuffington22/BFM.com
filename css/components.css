@@ -778,33 +778,6 @@
   color: var(--text-primary);
 }
 
-.footer__social {
-  display: flex;
-  gap: var(--space-md);
-  margin-top: var(--space-lg);
-}
-
-.footer__social a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
-  color: var(--text-tertiary);
-  transition: all var(--duration-fast) ease;
-}
-
-.footer__social a:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-.footer__social svg {
-  width: 18px;
-  height: 18px;
-}
 
 .footer__bottom {
   display: flex;

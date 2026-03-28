@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="/css/variables.css">
   <link rel="stylesheet" href="/css/global.css">
   <link rel="stylesheet" href="/css/components.css">
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
   <div id="header-placeholder"></div>
@@ -32,20 +33,26 @@
           <form id="contact-form" action="/functions/contact" method="POST">
             <div class="form-group">
               <label for="name">Full Name</label>
-              <input type="text" id="name" name="name" placeholder="Your full name" required>
+              <input type="text" id="name" name="name" placeholder="Your full name" required maxlength="100" autocomplete="name">
             </div>
             <div class="form-group">
               <label for="email">Email Address</label>
-              <input type="email" id="email" name="email" placeholder="you@example.com" required>
+              <input type="email" id="email" name="email" placeholder="you@example.com" required maxlength="254" autocomplete="email">
             </div>
             <div class="form-group">
               <label for="phone">Phone Number</label>
-              <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555">
+              <input type="tel" id="phone" name="phone" placeholder="(555) 555-5555" maxlength="30" autocomplete="tel">
             </div>
             <div class="form-group">
               <label for="message">Message</label>
-              <textarea id="message" name="message" placeholder="How can we help you?" required></textarea>
+              <textarea id="message" name="message" placeholder="How can we help you?" required maxlength="5000" autocomplete="off"></textarea>
             </div>
+            <!-- Honeypot field - hidden from humans, bots will fill it -->
+            <div style="position:absolute;left:-9999px;" aria-hidden="true">
+              <input type="text" name="website" tabindex="-1" autocomplete="off">
+            </div>
+            <!-- Cloudflare Turnstile CAPTCHA -->
+            <div class="cf-turnstile" data-sitekey="YOUR_TURNSTILE_SITE_KEY" data-theme="dark" data-callback="onTurnstileSuccess" style="margin-bottom:var(--space-lg);"></div>
             <p style="font-size:var(--font-size-xs);color:var(--text-muted);margin-bottom:var(--space-lg);">
               For medical emergencies, please call 911. This form is not for urgent medical questions.
             </p>
@@ -125,7 +132,8 @@
               style="border:0;filter:invert(90%) hue-rotate(180deg) brightness(0.95) contrast(0.9);"
               allowfullscreen=""
               loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade">
+              referrerpolicy="no-referrer"
+              sandbox="allow-scripts allow-same-origin">
             </iframe>
           </div>
         </div>
