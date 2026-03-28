@@ -77,13 +77,37 @@ export default {
       return addSecurityHeaders(new Response('Not Found', { status: 404 }));
     }
 
+    // Legacy WordPress redirects
+    const legacyRedirects = {
+      '/family-practice/': '/family-practice',
+      '/behavioral-health/': '/behavioral-health',
+      '/providers/': '/providers',
+      '/contact-us/': '/contact',
+      '/testimonials/': '/#testimonials',
+      '/ryan-buffington-md/': '/providers#ryan-buffington',
+      '/ty-talley-pa-c/': '/providers#ty-talley',
+      '/michelle-guilbeault-pa-c/': '/providers#michelle-guilbeault',
+      '/preventive-care/': '/family-practice#preventive-care',
+      '/medical-weight-loss-clinic/': '/family-practice#weight-loss',
+      '/urgent-care/': '/family-practice#urgent-care',
+      '/low-t/': '/family-practice#testosterone',
+      '/anxiety-treatment/': '/behavioral-health#anxiety',
+      '/online-adhd-treatment/': '/behavioral-health#adhd',
+      '/depression-treatment/': '/behavioral-health#depression',
+      '/insomnia/': '/behavioral-health#insomnia',
+      '/blog/': '/',
+    };
+    if (legacyRedirects[url.pathname]) {
+      return addSecurityHeaders(Response.redirect(url.origin + legacyRedirects[url.pathname], 301));
+    }
+
     // Handle contact form
     if (url.pathname === '/functions/contact' && request.method === 'POST') {
       const response = await handleContact(request, env);
       return addSecurityHeaders(response);
     }
 
-    // Serve static assets with security headers
+    // Serve static assets with security headers (uses default auto-trailing-slash)
     const response = await env.ASSETS.fetch(request);
     return addSecurityHeaders(response);
   }
