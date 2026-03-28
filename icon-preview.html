@@ -6,98 +6,300 @@
   <title>Icon Review</title>
   <style>
     body { background: #111; color: white; font-family: system-ui, sans-serif; display: flex; flex-direction: column; align-items: center; padding: 60px 20px; }
-    h1 { font-size: 28px; margin-bottom: 8px; }
-    .subtitle { color: #999; margin-bottom: 40px; }
-    .row { display: flex; gap: 60px; flex-wrap: wrap; justify-content: center; align-items: flex-start; margin-bottom: 40px; }
+    h1 { font-size: 24px; margin-bottom: 8px; }
+    .subtitle { color: #999; margin-bottom: 30px; font-size: 14px; }
+    .approved { color: #4ade80; }
+    .row { display: flex; gap: 50px; flex-wrap: wrap; justify-content: center; align-items: flex-start; margin-bottom: 30px; }
     .option { text-align: center; }
-    .icon-box { background: linear-gradient(135deg, #6366f1, #8b5cf6); width: 100px; height: 100px; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
-    .icon-box.big { width: 160px; height: 160px; border-radius: 28px; }
+    .icon-box { background: linear-gradient(135deg, #6366f1, #8b5cf6); width: 120px; height: 120px; border-radius: 22px; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
     .icon-box.bh { background: linear-gradient(135deg, #8b5cf6, #06b6d4); }
-    .icon-box.old { opacity: 0.4; }
-    .label { font-size: 15px; color: #ccc; font-weight: 500; }
-    .desc { font-size: 13px; color: #888; margin-top: 6px; max-width: 200px; margin-left: auto; margin-right: auto; }
-    hr { border: none; border-top: 1px solid #333; width: 100%; max-width: 700px; margin: 40px 0; }
+    .icon-box.old { opacity: 0.3; width: 70px; height: 70px; border-radius: 14px; }
+    .label { font-size: 14px; color: #ccc; font-weight: 500; }
+    .desc { font-size: 12px; color: #888; margin-top: 4px; max-width: 180px; margin-left: auto; margin-right: auto; }
+    hr { border: none; border-top: 1px solid #333; width: 100%; max-width: 800px; margin: 25px 0; }
+    .section { margin-bottom: 10px; }
   </style>
 </head>
 <body>
 
-  <!-- FAMILY PRACTICE - stethoscope matching reference photo -->
-  <h1>1. Family Practice — Stethoscope v3</h1>
-  <p class="subtitle">Matching the real stethoscope shape — earpieces at top, tube curves down to chest piece on the side</p>
-  <div class="row">
-    <div class="option">
-      <div class="icon-box big">
-        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <!-- Earpiece tips (angled inward at top) -->
-          <ellipse cx="7" cy="2.5" rx="1" ry="0.7"/>
-          <ellipse cx="13" cy="2.5" rx="1" ry="0.7"/>
-          <!-- Ear tubes going up then curving into U shape -->
-          <path d="M7 3.2c0 1.5-1 3-2 4.5C3.5 10 3 12 4 14"/>
-          <path d="M13 3.2c0 1.5 1 3 2 4.5 1.5 2.3 2 4.3 1 6.3"/>
-          <!-- Main tube from bottom of U curving to the right -->
-          <path d="M4 14c-1 3 1 5 3 6.5s5 2 7 0"/>
-          <path d="M16 14c1 2 0 4-2 5.5"/>
-          <!-- Chest piece (diaphragm) off to the right -->
-          <circle cx="17" cy="19" r="2.5"/>
-          <circle cx="17" cy="19" r="1" />
-        </svg>
+  <!-- 1. FAMILY PRACTICE - Stethoscope from Lucide -->
+  <div class="section">
+    <h1>1. Family Practice <span class="approved">✓</span></h1>
+    <p class="subtitle">Stethoscope — from Lucide icons</p>
+    <div class="row">
+      <div class="option">
+        <div class="icon-box">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 2v2"/>
+            <path d="M5 2v2"/>
+            <path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/>
+            <path d="M8 15a6 6 0 0 0 12 0v-3"/>
+            <circle cx="20" cy="10" r="2"/>
+          </svg>
+        </div>
+        <p class="label">Lucide stethoscope</p>
       </div>
-      <p class="label">Option A</p>
-      <p class="desc">Realistic shape — earpieces at top, tube curves down, chest piece hangs to the side</p>
-    </div>
-
-    <div class="option">
-      <div class="icon-box big">
-        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <!-- Earpieces at top -->
-          <circle cx="6.5" cy="2" r="0.8" fill="white"/>
-          <circle cx="13.5" cy="2" r="0.8" fill="white"/>
-          <!-- U-shaped headset -->
-          <path d="M6.5 2.8C6 5 5 7 5 9c0 2.5 2 4 5 4"/>
-          <path d="M13.5 2.8C14 5 15 7 15 9c0 2.5-2 4-5 4"/>
-          <!-- Long tube curving down and to the right -->
-          <path d="M10 13c0 2 1 4 3 5.5s4 1.5 5 0"/>
-          <!-- Chest piece -->
-          <circle cx="19" cy="18" r="2.5"/>
-          <circle cx="19" cy="18" r="0.8"/>
-        </svg>
+      <div class="option">
+        <div class="icon-box">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 4h-1a2 2 0 0 0 -2 2v3.5a5.5 5.5 0 0 0 11 0v-3.5a2 2 0 0 0 -2 -2h-1"/>
+            <path d="M8 15a6 6 0 1 0 12 0v-3"/>
+            <path d="M11 3v2"/>
+            <path d="M6 3v2"/>
+            <circle cx="20" cy="10" r="2"/>
+          </svg>
+        </div>
+        <p class="label">Tabler stethoscope</p>
       </div>
-      <p class="label">Option B</p>
-      <p class="desc">Cleaner U-headset with tube sweeping to chest piece</p>
-    </div>
-
-    <div class="option">
-      <div class="icon-box big">
-        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <!-- Earpieces -->
-          <circle cx="7" cy="1.5" r="0.8" fill="white"/>
-          <circle cx="14" cy="1.5" r="0.8" fill="white"/>
-          <!-- Metal band connecting earpieces (spring tension) -->
-          <path d="M7 2.3 C7 4 6 5.5 5.5 7"/>
-          <path d="M14 2.3 C14 4 15 5.5 15.5 7"/>
-          <!-- Rubber tubing in U shape -->
-          <path d="M5.5 7c-1 2-1.5 4.5 0 6.5s4 3 5 3"/>
-          <path d="M15.5 7c1 2 1.5 4.5 0 6.5s-4 3-5 3"/>
-          <!-- Single tube down to chest piece -->
-          <path d="M10.5 16.5c0 0 2 1 4 0"/>
-          <path d="M14.5 16.5c1.5-0.5 3 0.5 3 2"/>
-          <!-- Chest piece -->
-          <circle cx="18" cy="20" r="2.2"/>
-          <circle cx="18" cy="20" r="0.7"/>
-        </svg>
+      <div class="option">
+        <div class="icon-box old">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <p class="label" style="color:#555;font-size:11px;">Current</p>
       </div>
-      <p class="label">Option C</p>
-      <p class="desc">Detailed version with visible spring band and tube routing</p>
     </div>
   </div>
 
-  <p style="color:#555;font-size:13px;">Current icon for comparison:</p>
-  <div class="row">
-    <div class="option">
-      <div class="icon-box old">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+  <hr>
+
+  <!-- 2. BEHAVIORAL HEALTH - Brain from Lucide & Tabler -->
+  <div class="section">
+    <h1>2. Behavioral Health <span class="approved">✓</span></h1>
+    <p class="subtitle">Brain — matching your reference image</p>
+    <div class="row">
+      <div class="option">
+        <div class="icon-box bh">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 18V5"/>
+            <path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4"/>
+            <path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5"/>
+            <path d="M17.997 5.125a4 4 0 0 1 2.526 5.77"/>
+            <path d="M18 18a4 4 0 0 0 2-7.464"/>
+            <path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517"/>
+            <path d="M6 18a4 4 0 0 1-2-7.464"/>
+            <path d="M6.003 5.125a4 4 0 0 0-2.526 5.77"/>
+          </svg>
+        </div>
+        <p class="label">Lucide brain</p>
       </div>
-      <p class="label" style="color:#666;">Current (EKG line)</p>
+      <div class="option">
+        <div class="icon-box bh">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M15.5 13a3.5 3.5 0 0 0 -3.5 3.5v1a3.5 3.5 0 0 0 7 0v-1.8"/>
+            <path d="M8.5 13a3.5 3.5 0 0 1 3.5 3.5v1a3.5 3.5 0 0 1 -7 0v-1.8"/>
+            <path d="M17.5 16a3.5 3.5 0 0 0 0 -7h-.5"/>
+            <path d="M19 9.3v-2.8a3.5 3.5 0 0 0 -7 0"/>
+            <path d="M6.5 16a3.5 3.5 0 0 1 0 -7h.5"/>
+            <path d="M5 9.3v-2.8a3.5 3.5 0 0 1 7 0v10"/>
+          </svg>
+        </div>
+        <p class="label">Tabler brain</p>
+      </div>
+      <div class="option">
+        <div class="icon-box bh old">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 0 20 10 10 0 0 1 0-20z"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <p class="label" style="color:#555;font-size:11px;">Current</p>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 3. WEIGHT LOSS - Scale -->
+  <div class="section">
+    <h1>3. Weight Loss <span class="approved">✓</span></h1>
+    <p class="subtitle">Bathroom scale — matching your reference image</p>
+    <div class="row">
+      <div class="option">
+        <div class="icon-box">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4h-10a4 4 0 0 1-4-4v-10"/>
+            <path d="M12 7c1.956 0 3.724.802 5 2.095l-2.956 2.904a3 3 0 0 0-2.038-.799a3 3 0 0 0-2.038.798l-2.956-2.903a6.979 6.979 0 0 1 5-2.095"/>
+          </svg>
+        </div>
+        <p class="label">Tabler scale</p>
+      </div>
+      <div class="option">
+        <div class="icon-box old">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+        </div>
+        <p class="label" style="color:#555;font-size:11px;">Current</p>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 4. URGENT CARE - Medical cross in circle -->
+  <div class="section">
+    <h1>4. Urgent Care <span class="approved">✓</span></h1>
+    <p class="subtitle">Medical cross in circle — matching your reference image</p>
+    <div class="row">
+      <div class="option">
+        <div class="icon-box">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M8 12h8"/>
+            <path d="M12 8v8"/>
+          </svg>
+        </div>
+        <p class="label">Lucide circle-plus</p>
+      </div>
+      <div class="option">
+        <div class="icon-box">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 9a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h4a1 1 0 0 1 1 1v4a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-4a1 1 0 0 1 1-1h4a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-4a1 1 0 0 1-1-1V4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4a1 1 0 0 1-1 1z"/>
+          </svg>
+        </div>
+        <p class="label">Lucide medical cross</p>
+        <p class="desc">Thicker cross shape, no circle</p>
+      </div>
+      <div class="option">
+        <div class="icon-box old">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <p class="label" style="color:#555;font-size:11px;">Current</p>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 5. TESTOSTERONE - Options -->
+  <div class="section">
+    <h1>5. Testosterone Therapy</h1>
+    <p class="subtitle">Currently a pencil/edit tool — pick a replacement</p>
+    <div class="row">
+      <div class="option">
+        <div class="icon-box">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+        </div>
+        <p class="label">Lightning Bolt</p>
+        <p class="desc">Energy, vitality, power</p>
+      </div>
+      <div class="option">
+        <div class="icon-box">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="3 17 9 11 13 15 21 7"/>
+            <polyline points="15 7 21 7 21 13"/>
+          </svg>
+        </div>
+        <p class="label">Trending Up</p>
+        <p class="desc">Boosting levels</p>
+      </div>
+      <div class="option">
+        <div class="icon-box">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2l8 4v6c0 5.5-3.5 8.5-8 10-4.5-1.5-8-4.5-8-10V6l8-4z"/>
+            <path d="M12 8v8"/>
+            <path d="M8 12h8"/>
+          </svg>
+        </div>
+        <p class="label">Shield + Cross</p>
+        <p class="desc">Strength, protection</p>
+      </div>
+      <div class="option">
+        <div class="icon-box old">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg>
+        </div>
+        <p class="label" style="color:#555;font-size:11px;">Current</p>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 6. ANXIETY - Options -->
+  <div class="section">
+    <h1>6. Anxiety Treatment</h1>
+    <p class="subtitle">Currently a smiley face — pick a replacement</p>
+    <div class="row">
+      <div class="option">
+        <div class="icon-box bh">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
+            <path d="M22 10a3 3 0 0 0-3-3h-2.207a5.502 5.502 0 0 0-10.702.5"/>
+          </svg>
+        </div>
+        <p class="label">Cloud</p>
+        <p class="desc">Fog lifting, clearing</p>
+      </div>
+      <div class="option">
+        <div class="icon-box bh">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            <path d="M12 13v4"/>
+            <path d="M10 15h4"/>
+          </svg>
+        </div>
+        <p class="label">Heart + Cross</p>
+        <p class="desc">Healing the heart</p>
+      </div>
+      <div class="option">
+        <div class="icon-box bh">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 17 3.5s1.5 2 2.5 5c.5 1.5.5 3 0 4.5-1 3-4 5-8.5 7z"/>
+            <path d="M2 21c0-3 1.85-5.36 5.08-7C9.5 12.52 12 13 13 14"/>
+          </svg>
+        </div>
+        <p class="label">Leaf</p>
+        <p class="desc">Natural calm, growth</p>
+      </div>
+      <div class="option">
+        <div class="icon-box bh old">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        </div>
+        <p class="label" style="color:#555;font-size:11px;">Current</p>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- 7. ADHD - Options -->
+  <div class="section">
+    <h1>7. ADHD Management</h1>
+    <p class="subtitle">Currently a clock — pick a replacement</p>
+    <div class="row">
+      <div class="option">
+        <div class="icon-box bh">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <circle cx="12" cy="12" r="6"/>
+            <circle cx="12" cy="12" r="2"/>
+          </svg>
+        </div>
+        <p class="label">Target</p>
+        <p class="desc">Focus, zeroing in</p>
+      </div>
+      <div class="option">
+        <div class="icon-box bh">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+          </svg>
+        </div>
+        <p class="label">Compass</p>
+        <p class="desc">Direction, navigation</p>
+      </div>
+      <div class="option">
+        <div class="icon-box bh">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+        </div>
+        <p class="label">Star</p>
+        <p class="desc">Achievement, management</p>
+      </div>
+      <div class="option">
+        <div class="icon-box bh old">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="12 6 12 12 16.5 12"/></svg>
+        </div>
+        <p class="label" style="color:#555;font-size:11px;">Current</p>
+      </div>
     </div>
   </div>
 
