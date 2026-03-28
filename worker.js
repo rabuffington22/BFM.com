@@ -173,43 +173,36 @@ async function handleContact(request, env) {
     const safeName = name.replace(/[\r\n]/g, '').trim();
     const safePhone = phone ? phone.replace(/[\r\n]/g, '').trim() : '';
 
-    // Send email via MailChannels
-    const emailResponse = await fetch('https://api.mailchannels.net/tx/v1/send', {
+    // Send email via Resend
+    const emailResponse = await fetch('https://api.resend.com/emails', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${env.RESEND_API_KEY}`,
+      },
       body: JSON.stringify({
-        personalizations: [
-          { to: [{ email: 'info@buffingtonfamilymedicine.com', name: 'Buffington Family Medicine' }] },
-        ],
-        from: { email: 'noreply@buffingtonfamilymedicine.com', name: 'BFM Website Contact Form' },
-        reply_to: { email, name: safeName },
+        from: 'BFM Website Contact Form <noreply@buffingtonfamilymedicine.com>',
+        to: ['info@buffingtonfamilymedicine.com'],
+        reply_to: email,
         subject: `New Contact Form Submission from ${safeName}`,
-        content: [
-          {
-            type: 'text/plain',
-            value: `New contact form submission:\n\nName: ${safeName}\nEmail: ${email}\nPhone: ${safePhone || 'Not provided'}\n\nMessage:\n${message}`,
-          },
-          {
-            type: 'text/html',
-            value: `
-              <h2>New Contact Form Submission</h2>
-              <table style="border-collapse:collapse;width:100%;max-width:600px;">
-                <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Name</td><td style="padding:8px;border-bottom:1px solid #eee;">${esc(safeName)}</td></tr>
-                <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Email</td><td style="padding:8px;border-bottom:1px solid #eee;"><a href="mailto:${esc(email)}">${esc(email)}</a></td></tr>
-                <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Phone</td><td style="padding:8px;border-bottom:1px solid #eee;">${esc(safePhone || 'Not provided')}</td></tr>
-              </table>
-              <h3 style="margin-top:20px;">Message</h3>
-              <p style="white-space:pre-wrap;">${esc(message)}</p>
-            `,
-          },
-        ],
+        text: `New contact form submission:\n\nName: ${safeName}\nEmail: ${email}\nPhone: ${safePhone || 'Not provided'}\n\nMessage:\n${message}`,
+        html: `
+          <h2>New Contact Form Submission</h2>
+          <table style="border-collapse:collapse;width:100%;max-width:600px;">
+            <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Name</td><td style="padding:8px;border-bottom:1px solid #eee;">${esc(safeName)}</td></tr>
+            <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Email</td><td style="padding:8px;border-bottom:1px solid #eee;"><a href="mailto:${esc(email)}">${esc(email)}</a></td></tr>
+            <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Phone</td><td style="padding:8px;border-bottom:1px solid #eee;">${esc(safePhone || 'Not provided')}</td></tr>
+          </table>
+          <h3 style="margin-top:20px;">Message</h3>
+          <p style="white-space:pre-wrap;">${esc(message)}</p>
+        `,
       }),
     });
 
-    if (emailResponse.ok || emailResponse.status === 202) {
+    if (emailResponse.ok) {
       return Response.json({ success: true });
     } else {
-      console.error('MailChannels error:', await emailResponse.text());
+      console.error('Resend error:', await emailResponse.text());
       return Response.json({ error: 'Failed to send email' }, { status: 500 });
     }
   } catch (err) {
