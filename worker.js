@@ -67,8 +67,13 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
-    // Block access to config/server files
-    if (BLOCKED_PATHS.includes(url.pathname)) {
+    // Block access to config/server files and hidden directories
+    if (BLOCKED_PATHS.includes(url.pathname) ||
+        url.pathname.startsWith('/.git') ||
+        url.pathname.startsWith('/.wrangler') ||
+        url.pathname.startsWith('/.claude') ||
+        url.pathname.startsWith('/.env') ||
+        url.pathname.startsWith('/.assetsignore')) {
       return addSecurityHeaders(new Response('Not Found', { status: 404 }));
     }
 

@@ -1,6 +1,12 @@
 name = "bfm-com"
 main = "worker.js"
 compatibility_date = "2025-01-01"
+workers_dev = true
+
+routes = [
+  { pattern = "buffingtonfamilymedicine.com/*", zone_name = "buffingtonfamilymedicine.com" },
+  { pattern = "www.buffingtonfamilymedicine.com/*", zone_name = "buffingtonfamilymedicine.com" }
+]
 
 [assets]
 directory = "."

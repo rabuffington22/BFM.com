@@ -1,0 +1,13 @@
+.git
+.wrangler
+.claude
+.DS_Store
+node_modules
+.env
+.env.*
+.gitignore
+wrangler.toml
+worker.js
+_headers
+_redirects
+_preview-icon-gradient.html
