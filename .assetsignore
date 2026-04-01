@@ -11,3 +11,6 @@ worker.js
 _headers
 _redirects
 _preview-icon-gradient.html
+CLAUDE.md
+package.json
+package-lock.json

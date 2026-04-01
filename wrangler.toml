@@ -1,7 +1,7 @@
 name = "bfm-com"
 main = "worker.js"
 compatibility_date = "2025-01-01"
-workers_dev = true
+workers_dev = false
 
 routes = [
   { pattern = "buffingtonfamilymedicine.com/*", zone_name = "buffingtonfamilymedicine.com" },

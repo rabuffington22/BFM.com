@@ -6,12 +6,15 @@ const BLOCKED_PATHS = [
   '/_headers',
   '/_redirects',
   '/_preview-icon-gradient.html',
+  '/CLAUDE.md',
+  '/package.json',
+  '/package-lock.json',
 ];
 
 // Security headers applied to all responses
 const SECURITY_HEADERS = {
   'Content-Security-Policy':
-    "default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-src https://www.google.com https://challenges.cloudflare.com; connect-src 'self'; font-src 'self' https://fonts.gstatic.com; base-uri 'self'; form-action 'self'",
+    "default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-src https://www.google.com https://challenges.cloudflare.com; connect-src 'self'; font-src 'self' https://fonts.gstatic.com; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests",
   'X-Frame-Options': 'SAMEORIGIN',
   'X-Content-Type-Options': 'nosniff',
   'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
@@ -115,9 +118,12 @@ export default {
 
 async function handleContact(request, env) {
   try {
-    // CSRF: Validate Origin header
+    // CSRF: Validate Origin header (reject missing Origin to prevent non-browser abuse)
     const origin = request.headers.get('Origin');
-    if (origin && !ALLOWED_ORIGINS.includes(origin)) {
+    if (!origin) {
+      return Response.json({ error: 'Forbidden' }, { status: 403 });
+    }
+    if (!ALLOWED_ORIGINS.includes(origin)) {
       // Also allow localhost for development
       if (!origin.startsWith('http://localhost') && !origin.startsWith('http://127.0.0.1')) {
         return Response.json({ error: 'Forbidden' }, { status: 403 });
@@ -136,6 +142,16 @@ async function handleContact(request, env) {
     // Periodically clean up rate limit map
     if (rateLimitMap.size > 1000) {
       cleanupRateLimit();
+    }
+
+    // Validate Content-Type and body size
+    const contentType = request.headers.get('Content-Type') || '';
+    if (!contentType.includes('application/json')) {
+      return Response.json({ error: 'Invalid content type' }, { status: 400 });
+    }
+    const contentLength = parseInt(request.headers.get('Content-Length') || '0', 10);
+    if (contentLength > 50000) {
+      return Response.json({ error: 'Request too large' }, { status: 413 });
     }
 
     const body = await request.json();
@@ -170,27 +186,31 @@ async function handleContact(request, env) {
       return Response.json({ error: 'Invalid email address' }, { status: 400 });
     }
 
-    // Turnstile CAPTCHA verification (if configured)
+    // Turnstile CAPTCHA verification (fail closed — reject if secret not configured)
+    const turnstileSecret = env.TURNSTILE_SECRET_KEY || env.TURNSTILE_SECRET;
+    if (!turnstileSecret) {
+      console.error('Turnstile secret not configured — rejecting form submission');
+      return Response.json({ error: 'Form temporarily unavailable. Please call us at (817) 431-9199.' }, { status: 503 });
+    }
+
     const turnstileToken = body['cf-turnstile-response'];
-    if (env.TURNSTILE_SECRET) {
-      if (!turnstileToken) {
-        return Response.json({ error: 'Please complete the CAPTCHA verification' }, { status: 400 });
-      }
+    if (!turnstileToken) {
+      return Response.json({ error: 'Please complete the CAPTCHA verification' }, { status: 400 });
+    }
 
-      const turnstileResponse = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          secret: env.TURNSTILE_SECRET,
-          response: turnstileToken,
-          remoteip: ip,
-        }),
-      });
+    const turnstileResponse = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        secret: turnstileSecret,
+        response: turnstileToken,
+        remoteip: ip,
+      }),
+    });
 
-      const turnstileResult = await turnstileResponse.json();
-      if (!turnstileResult.success) {
-        return Response.json({ error: 'CAPTCHA verification failed. Please try again.' }, { status: 400 });
-      }
+    const turnstileResult = await turnstileResponse.json();
+    if (!turnstileResult.success) {
+      return Response.json({ error: 'CAPTCHA verification failed. Please try again.' }, { status: 400 });
     }
 
     // Sanitize name for use in email subject (strip newlines)
@@ -206,7 +226,7 @@ async function handleContact(request, env) {
       },
       body: JSON.stringify({
         from: 'BFM Website Contact Form <noreply@buffingtonfamilymedicine.com>',
-        to: ['info@buffingtonfamilymedicine.com'],
+        to: ['bfm@buffingtonfamilymedicine.com'],
         reply_to: email,
         subject: `New Contact Form Submission from ${safeName}`,
         text: `New contact form submission:\n\nName: ${safeName}\nEmail: ${email}\nPhone: ${safePhone || 'Not provided'}\n\nMessage:\n${message}`,
@@ -236,5 +256,5 @@ async function handleContact(request, env) {
 }
 
 function esc(s) {
-  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#x27;');
 }

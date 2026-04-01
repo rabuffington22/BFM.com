@@ -6,9 +6,11 @@
   if (header) {
     try {
       const res = await fetch('/partials/header.html');
-      header.innerHTML = await res.text();
-      initNav();
-      setActiveLink();
+      if (res.ok) {
+        header.innerHTML = await res.text();
+        initNav();
+        setActiveLink();
+      }
     } catch (e) {
       console.warn('Header partial failed to load:', e);
     }
@@ -17,7 +19,9 @@
   if (footer) {
     try {
       const res = await fetch('/partials/footer.html');
-      footer.innerHTML = await res.text();
+      if (res.ok) {
+        footer.innerHTML = await res.text();
+      }
     } catch (e) {
       console.warn('Footer partial failed to load:', e);
     }
