@@ -982,7 +982,7 @@
   text-decoration: none;
   font-size: var(--font-size-sm);
   font-weight: 600;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 8px 80px 20px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 8px 40px 10px rgba(59, 130, 246, 0.15);
   transition: transform var(--duration-base) ease, box-shadow var(--duration-base) ease, background var(--duration-base) ease;
 }
 
