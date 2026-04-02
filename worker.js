@@ -70,6 +70,12 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    // Redirect www to root domain (SEO: single canonical origin)
+    if (url.hostname === 'www.buffingtonfamilymedicine.com') {
+      url.hostname = 'buffingtonfamilymedicine.com';
+      return Response.redirect(url.toString(), 301);
+    }
+
     // Block access to config/server files and hidden directories
     if (BLOCKED_PATHS.includes(url.pathname) ||
         url.pathname.startsWith('/.git') ||
@@ -99,6 +105,12 @@ export default {
       '/depression-treatment/': '/behavioral-health#depression',
       '/insomnia/': '/behavioral-health#insomnia',
       '/blog/': '/',
+      '/provider/allison-dimaggio-pa-c': '/providers.html',
+      '/provider/lieu-nguyen-pa-c': '/providers.html',
+      '/provider/kaylee-davis-pa-c': '/providers.html',
+      '/why-go-for-a-family-medicine-practitioner-in-keller-tx': '/family-practice.html',
+      '/video-buffington-family-medicine/': '/',
+      '/staff/': '/providers.html',
     };
     if (legacyRedirects[url.pathname]) {
       return addSecurityHeaders(Response.redirect(url.origin + legacyRedirects[url.pathname], 301));

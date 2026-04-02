@@ -965,7 +965,7 @@
 /* ========================================
    KLARA FLOATING BUTTON
    ======================================== */
-.klara-fab {
+.msg-fab {
   position: fixed;
   bottom: var(--space-xl);
   right: var(--space-xl);
@@ -974,8 +974,9 @@
   align-items: center;
   gap: var(--space-sm);
   padding: var(--space-md) var(--space-lg);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(30, 30, 35, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   color: var(--text-primary);
   border-radius: 999px;
@@ -986,18 +987,18 @@
   transition: transform var(--duration-base) ease, box-shadow var(--duration-base) ease, background var(--duration-base) ease;
 }
 
-.klara-fab:hover {
+.msg-fab:hover {
   transform: translateY(-2px);
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 6px 28px rgba(0, 0, 0, 0.4);
 }
 
-.klara-fab svg {
+.msg-fab svg {
   flex-shrink: 0;
 }
 
 @media (max-width: 767px) {
-  .klara-fab {
+  .msg-fab {
     bottom: var(--space-lg);
     right: var(--space-lg);
   }
