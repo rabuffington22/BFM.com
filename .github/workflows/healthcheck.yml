@@ -1,0 +1,34 @@
+name: Healthcheck
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: healthcheck
+  cancel-in-progress: false
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Probe homepage
+        id: probe
+        run: |
+          status=$(curl -sS -o /dev/null -w "%{http_code}" --max-time 30 --retry 2 --retry-delay 5 https://buffingtonfamilymedicine.com/)
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          echo "Site returned HTTP $status"
+          test "$status" = "200"
+
+      - name: Report success to healthchecks.io
+        if: success()
+        run: curl -fsS --retry 3 --max-time 10 "${{ secrets.HEALTHCHECKS_PING_URL }}"
+
+      - name: Report failure to healthchecks.io
+        if: failure()
+        run: |
+          curl -fsS --retry 3 --max-time 10 \
+            --data-raw "Probe failed: HTTP ${{ steps.probe.outputs.status }}" \
+            "${{ secrets.HEALTHCHECKS_PING_URL }}/fail" || true
