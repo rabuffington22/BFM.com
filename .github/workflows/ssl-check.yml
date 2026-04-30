@@ -1,0 +1,50 @@
+name: SSL Cert Check
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: ssl-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    env:
+      DOMAIN: buffingtonfamilymedicine.com
+      MIN_DAYS: 14
+    steps:
+      - name: Probe SSL cert expiry
+        id: probe
+        run: |
+          expiry=$(echo | openssl s_client -servername "$DOMAIN" -connect "$DOMAIN":443 2>/dev/null \
+            | openssl x509 -noout -enddate | cut -d= -f2)
+          if [ -z "$expiry" ]; then
+            echo "Failed to read cert expiry"
+            echo "days_left=-1" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+          expiry_epoch=$(date -d "$expiry" +%s)
+          now_epoch=$(date +%s)
+          days_left=$(( (expiry_epoch - now_epoch) / 86400 ))
+          echo "Cert notAfter: $expiry (${days_left} days remaining)"
+          echo "days_left=$days_left" >> "$GITHUB_OUTPUT"
+          echo "expiry=$expiry" >> "$GITHUB_OUTPUT"
+          test "$days_left" -gt "$MIN_DAYS"
+
+      - name: Report success to healthchecks.io
+        if: success()
+        run: |
+          curl -fsS --retry 3 --max-time 10 \
+            --data-raw "Cert OK: ${{ steps.probe.outputs.days_left }} days remaining (expires ${{ steps.probe.outputs.expiry }})" \
+            "${{ secrets.HEALTHCHECKS_SSL_PING_URL }}"
+
+      - name: Report failure to healthchecks.io
+        if: failure()
+        run: |
+          curl -fsS --retry 3 --max-time 10 \
+            --data-raw "Cert expiring soon or probe failed: ${{ steps.probe.outputs.days_left }} days remaining (threshold ${MIN_DAYS})" \
+            "${{ secrets.HEALTHCHECKS_SSL_PING_URL }}/fail" || true
