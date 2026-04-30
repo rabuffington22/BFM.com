@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  ping:
+  homepage:
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
@@ -32,3 +32,34 @@ jobs:
           curl -fsS --retry 3 --max-time 10 \
             --data-raw "Probe failed: HTTP ${{ steps.probe.outputs.status }}" \
             "${{ secrets.HEALTHCHECKS_PING_URL }}/fail" || true
+
+  contact-form:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Probe contact form
+        id: probe
+        run: |
+          status=$(curl -sS -o body.txt -w "%{http_code}" \
+            --max-time 30 --retry 2 --retry-delay 5 \
+            -X POST \
+            -H "Origin: https://buffingtonfamilymedicine.com" \
+            -H "Content-Type: application/json" \
+            -d '{}' \
+            https://buffingtonfamilymedicine.com/functions/contact)
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          echo "Endpoint returned HTTP $status"
+          cat body.txt
+          echo
+          test "$status" = "400" && grep -q "Missing required fields" body.txt
+
+      - name: Report success to healthchecks.io
+        if: success()
+        run: curl -fsS --retry 3 --max-time 10 "${{ secrets.HEALTHCHECKS_CONTACT_PING_URL }}"
+
+      - name: Report failure to healthchecks.io
+        if: failure()
+        run: |
+          curl -fsS --retry 3 --max-time 10 \
+            --data-raw "Contact probe failed: HTTP ${{ steps.probe.outputs.status }}" \
+            "${{ secrets.HEALTHCHECKS_CONTACT_PING_URL }}/fail" || true
