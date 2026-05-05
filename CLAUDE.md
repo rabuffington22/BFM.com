@@ -36,11 +36,12 @@ Live domain: `buffingtonfamilymedicine.com` (and `www.` redirect)
 │   ├── depression.html
 │   ├── adhd.html
 │   └── insomnia.html
-├── hubs/                       # Next.js-generated education hubs (static export)
+├── hubs/                       # Vanilla-HTML education hubs (shared hub.css)
 │   ├── weight-loss/
 │   ├── testosterone/
 │   ├── adhd/
-│   └── mental-health/
+│   ├── mental-health/
+│   └── insomnia/
 ├── css/
 │   ├── reset.css               # Modern CSS reset
 │   ├── variables.css           # Design tokens (colors, spacing, typography)
@@ -173,10 +174,11 @@ Service pages follow a consistent content pattern: hero → testimonial → 3 va
 
 ## Education Hubs (`/hubs/`)
 
-Static Next.js export. Do not edit these manually — they are generated. Each hub has:
-- `index.html` — rendered page
-- `index.txt` — plain text version
-- `_next/static/` — JS/CSS chunks
+Vanilla HTML pages — edit directly. Five hubs: `weight-loss`, `testosterone`, `adhd`, `mental-health`, `insomnia`. Each hub has:
+- `index.html` — the page
+- `index.txt` — optional plain-text companion (present in some hubs)
+
+Shared styling via `hubs/hub.css` (loaded after the global CSS chain). Hub footers are baked into each `index.html` rather than injected from `partials/footer.html`, so sitewide footer changes (hours, links, etc.) must be applied to each hub `index.html` as well.
 
 ## Security Notes
 
