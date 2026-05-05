@@ -206,8 +206,8 @@ Three GitHub Actions workflows ping healthchecks.io on a schedule. Secrets store
 
 | Check | File | Schedule | Secret |
 |-------|------|----------|--------|
-| Homepage (HTTP 200) | `.github/workflows/healthcheck.yml` | Every 10 min | `HEALTHCHECKS_PING_URL` |
-| Contact form (HTTP 400 + "Missing required fields") | `.github/workflows/healthcheck.yml` | Every 10 min | `HEALTHCHECKS_CONTACT_PING_URL` |
+| Homepage (HTTP 200) | `.github/workflows/healthcheck.yml` | Hourly | `HEALTHCHECKS_PING_URL` |
+| Contact form (HTTP 400 + "Missing required fields") | `.github/workflows/healthcheck.yml` | Hourly | `HEALTHCHECKS_CONTACT_PING_URL` |
 | SSL cert expiry (>14 days) | `.github/workflows/ssl-check.yml` | Daily 6am UTC | `HEALTHCHECKS_SSL_PING_URL` |
 
 **Contact probe invariant:** The probe POSTs `{}` to `/functions/contact` with a valid `Origin` and `Content-Type: application/json`. It exits at "Missing required fields" — before Turnstile or Resend are called. If you add validation logic *before* the required-fields check in `worker.js`, you may break the probe.
