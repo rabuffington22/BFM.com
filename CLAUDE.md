@@ -75,6 +75,8 @@ Live domain: `buffingtonfamilymedicine.com` (and `www.` redirect)
 npx wrangler deploy
 ```
 
+> **Gotcha — deploys are manual.** Pushing to `main` does NOT publish the site. Cloudflare Workers has no GitHub auto-deploy hook configured, so any content change (hours, copy, new pages) requires `npx wrangler deploy` after the commit lands. Run the deploy as part of the same task as the edit, not separately.
+
 - Config: `wrangler.toml` — project name `bfm-com`, assets dir `.` (repo root)
 - Compatibility date: `2025-01-01`
 - Routes: `buffingtonfamilymedicine.com/*` and `www.buffingtonfamilymedicine.com/*`
