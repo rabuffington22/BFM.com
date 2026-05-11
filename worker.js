@@ -136,8 +136,11 @@ async function handleContact(request, env) {
       return Response.json({ error: 'Forbidden' }, { status: 403 });
     }
     if (!ALLOWED_ORIGINS.includes(origin)) {
-      // Also allow localhost for development
-      if (!origin.startsWith('http://localhost') && !origin.startsWith('http://127.0.0.1')) {
+      // Also allow localhost for development. Parse the hostname instead of
+      // string-prefix matching so e.g. `http://localhost.evil.com` doesn't pass.
+      let originHost = '';
+      try { originHost = new URL(origin).hostname; } catch { /* invalid Origin */ }
+      if (originHost !== 'localhost' && originHost !== '127.0.0.1') {
         return Response.json({ error: 'Forbidden' }, { status: 403 });
       }
     }
@@ -156,17 +159,24 @@ async function handleContact(request, env) {
       cleanupRateLimit();
     }
 
-    // Validate Content-Type and body size
+    // Validate Content-Type
     const contentType = request.headers.get('Content-Type') || '';
     if (!contentType.includes('application/json')) {
       return Response.json({ error: 'Invalid content type' }, { status: 400 });
     }
-    const contentLength = parseInt(request.headers.get('Content-Length') || '0', 10);
-    if (contentLength > 50000) {
+
+    // Read body as text first so we can enforce the size cap against actual bytes
+    // received (Content-Length is client-supplied and can be missing or wrong).
+    const rawBody = await request.text();
+    if (rawBody.length > 50000) {
       return Response.json({ error: 'Request too large' }, { status: 413 });
     }
-
-    const body = await request.json();
+    let body;
+    try {
+      body = JSON.parse(rawBody);
+    } catch {
+      return Response.json({ error: 'Invalid JSON' }, { status: 400 });
+    }
     const { name, email, phone, message } = body;
 
     // Honeypot check - if filled, it's a bot. Return fake success.
