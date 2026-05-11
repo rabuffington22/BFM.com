@@ -14,7 +14,7 @@ const BLOCKED_PATHS = [
 // Security headers applied to all responses
 const SECURITY_HEADERS = {
   'Content-Security-Policy':
-    "default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-src https://www.google.com https://challenges.cloudflare.com; connect-src 'self'; font-src 'self' https://fonts.gstatic.com; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests",
+    "default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-src https://www.google.com https://challenges.cloudflare.com; connect-src 'self' https://api.drdwight.ai; font-src 'self' https://fonts.gstatic.com; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests",
   'X-Frame-Options': 'SAMEORIGIN',
   'X-Content-Type-Options': 'nosniff',
   'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
