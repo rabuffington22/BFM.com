@@ -84,19 +84,20 @@ npx wrangler deploy
 
 ## Worker Logic (`worker.js`)
 
-The Cloudflare Worker intercepts all requests and:
+The Cloudflare Worker intercepts requests **only for paths that don't match a static asset**:
 
-1. **Blocks sensitive files**: Returns 403 for `.env`, `.git`, `wrangler.toml`, `worker.js`, `_headers`, etc.
-2. **Applies security headers**: CSP, HSTS (1 year), X-Frame-Options, Referrer-Policy, Permissions-Policy
-3. **Handles legacy WordPress redirects**: 30+ redirect rules for old URL patterns (SEO preservation)
-4. **Contact form endpoint** (`POST /functions/contact`):
+1. **Blocks sensitive files**: Returns 404 for `.env`, `.git`, `wrangler.toml`, `worker.js`, `_headers`, etc.
+2. **Handles legacy WordPress redirects**: 30+ redirect rules for old URL patterns (SEO preservation)
+3. **Contact form endpoint** (`POST /functions/contact`):
    - Honeypot bot detection
    - Cloudflare Turnstile CAPTCHA verification
    - Rate limiting: 5 submissions per hour per IP
    - Input validation and sanitization
    - Sends email via Resend API
    - Returns JSON response
-5. **Falls through to static assets** for everything else
+4. **Adds security headers** (CSP, HSTS, X-Frame-Options, etc.) to its OWN responses
+
+> **Gotcha — the `[assets]` binding bypasses the Worker for any path that matches a static file.** That means `worker.js`'s `addSecurityHeaders` does NOT run for `/`, `/contact`, `/schedule`, etc. The headers users actually see on HTML pages come from `_headers` only. Keep security headers in **both** places: `_headers` for asset responses (the common case) and `worker.js` for Worker-generated responses (contact endpoint, legacy redirects).
 
 ### Worker Environment Variables (Cloudflare dashboard secrets)
 - `RESEND_API_KEY` — Resend API key for email delivery
@@ -185,9 +186,12 @@ Shared styling via `hubs/hub.css` (loaded after the global CSS chain). Hub foote
 ## Security Notes
 
 - Never commit `.env` or secrets — use Cloudflare dashboard for secrets
+- **Security headers live in `_headers`** (CSP, HSTS, Permissions-Policy, etc.) so they apply to static-asset responses, which bypass the Worker. `worker.js` keeps a parallel copy for the responses it does generate (contact endpoint, redirects). Keep the two in sync.
+- **`connect-src` must include `https://api.drdwight.ai`** for the booking precheck on `/schedule` to work. Forgetting this fails open (`js/schedule.js` catches the network error and redirects to Athena), so the protection is silently bypassed rather than producing a visible error.
 - CSP allows `unsafe-inline` for scripts/styles (required for inline styles in components)
 - Turnstile site key is public (in HTML); secret key is a Cloudflare secret
 - Rate limiting state is in-memory (resets on Worker restart) — not Redis-backed
+- After any header change, `cf-cache-status: HIT` responses can serve stale headers until the CDN cache rolls over. Purge the cache or wait it out if verifying live.
 
 ## SEO
 
