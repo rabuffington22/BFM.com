@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schedule an Appointment | Buffington Family Medicine - Keller, TX</title>
+  <meta name="description" content="Schedule a follow-up visit online with Michelle Guilbeault, PA-C or Ty Talley, PA-C at Buffington Family Medicine in Keller, TX.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#0a0a0b">
+  <link rel="canonical" href="https://buffingtonfamilymedicine.com/schedule.html">
+  <link rel="preload" href="/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/variables.css">
+  <link rel="stylesheet" href="/css/global.css">
+  <link rel="stylesheet" href="/css/components.css">
+</head>
+<body>
+  <div id="header-placeholder"></div>
+  <main>
+
+  <section class="page-header">
+    <div class="container">
+      <span class="section-label">Existing Patients</span>
+      <h1 class="fade-in">Schedule <span class="gradient-text">Online</span></h1>
+      <p class="fade-in" id="page-subtitle">A quick step so we can check your record before sending you to our booking site.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="card fade-in" style="padding:var(--space-2xl);max-width:560px;margin:0 auto;border-left:4px solid var(--accent);">
+
+        <div id="provider-banner" style="display:none;margin-bottom:var(--space-xl);padding:var(--space-md) var(--space-lg);background:rgba(255,255,255,0.04);border-radius:8px;">
+          <p style="margin:0;font-size:var(--font-size-sm);color:var(--text-secondary);">
+            You're scheduling a follow-up with
+            <strong id="provider-name" style="color:var(--accent);">&mdash;</strong>.
+          </p>
+        </div>
+
+        <form id="precheck-form" novalidate>
+          <p style="color:var(--text-secondary);margin:0 0 var(--space-xl);font-size:var(--font-size-sm);">
+            We just need to confirm your identity to make sure we coordinate your care correctly.
+          </p>
+
+          <div class="form-group" id="provider-group" style="display:none;">
+            <label for="provider">Provider</label>
+            <select id="provider" name="provider" required>
+              <option value="">Select a provider&hellip;</option>
+              <option value="michelle">Michelle Guilbeault, PA-C (Medical)</option>
+              <option value="ty">Ty Talley, PA-C (Behavioral Health)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" required maxlength="80" autocomplete="family-name" placeholder="As it appears on your record">
+          </div>
+
+          <div class="form-group">
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" name="dob" required autocomplete="bday">
+          </div>
+
+          <div class="form-group">
+            <label for="targetDate">What day are you hoping to come in?</label>
+            <input type="date" id="targetDate" name="targetDate" required>
+            <small style="display:block;margin-top:4px;color:var(--text-muted);font-size:var(--font-size-xs);">
+              We'll check that you don't already have a visit booked that day. You'll pick the actual time slot on the next page.
+            </small>
+          </div>
+
+          <button type="submit" class="btn btn--primary" id="submit-btn" style="width:100%;">Continue to Booking</button>
+
+          <p style="margin-top:var(--space-lg);font-size:var(--font-size-xs);color:var(--text-muted);text-align:center;">
+            New patients, please call <a href="tel:8174319199" style="color:var(--accent);">(817) 431-9199</a>.
+          </p>
+
+          <div id="form-status" class="form-status" style="margin-top:var(--space-lg);"></div>
+        </form>
+
+        <!-- Blocked state (replaces form on block) -->
+        <div id="blocked-state" style="display:none;">
+          <h3 style="margin-bottom:var(--space-md);">Let's coordinate your visits</h3>
+          <p id="blocked-message" style="color:var(--text-secondary);margin-bottom:var(--space-xl);"></p>
+          <a href="tel:8174319199" class="btn btn--primary btn--lg" style="width:100%;text-align:center;">Call (817) 431-9199</a>
+          <p style="margin-top:var(--space-lg);font-size:var(--font-size-sm);color:var(--text-muted);text-align:center;">
+            Office hours: Mon &ndash; Fri, 8:00 AM &ndash; 5:00 PM (closed 12:30 &ndash; 1:30)
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/js/includes.js"></script>
+  <script src="/js/animations.js"></script>
+  <script src="/js/schedule.js"></script>
+</body>
+</html>
