@@ -7,3 +7,4 @@ node_modules/
 .env.production
 .wrangler/
 hubs/_next/
+downloads/
