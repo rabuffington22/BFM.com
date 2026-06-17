@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Basic validation
-    if (!data.name || !data.email || !data.message) {
+    if (!data.name || !data.email || !data.dob || !data.message) {
       status.textContent = 'Please fill in all required fields.';
       status.className = 'form-status form-status--error';
       status.style.display = '';

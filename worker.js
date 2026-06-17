@@ -185,7 +185,7 @@ async function handleContact(request, env) {
     }
 
     // Validate required fields
-    if (!name || !email || !message) {
+    if (!name || !email || !dob || !message) {
       return Response.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
