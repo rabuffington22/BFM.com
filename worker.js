@@ -177,7 +177,7 @@ async function handleContact(request, env) {
     } catch {
       return Response.json({ error: 'Invalid JSON' }, { status: 400 });
     }
-    const { name, email, phone, message } = body;
+    const { name, email, phone, dob, message } = body;
 
     // Honeypot check - if filled, it's a bot. Return fake success.
     if (body.website) {
@@ -198,6 +198,9 @@ async function handleContact(request, env) {
     }
     if (phone && phone.length > 30) {
       return Response.json({ error: 'Phone number is too long' }, { status: 400 });
+    }
+    if (dob && dob.length > 20) {
+      return Response.json({ error: 'Date of birth is too long' }, { status: 400 });
     }
     if (message.length > 5000) {
       return Response.json({ error: 'Message is too long (max 5000 characters)' }, { status: 400 });
@@ -238,6 +241,7 @@ async function handleContact(request, env) {
     // Sanitize name for use in email subject (strip newlines)
     const safeName = name.replace(/[\r\n]/g, '').trim();
     const safePhone = phone ? phone.replace(/[\r\n]/g, '').trim() : '';
+    const safeDob = dob ? dob.replace(/[\r\n]/g, '').trim() : '';
 
     // Send email via Resend
     const emailResponse = await fetch('https://api.resend.com/emails', {
@@ -251,13 +255,14 @@ async function handleContact(request, env) {
         to: ['bfm@buffingtonfamilymedicine.com'],
         reply_to: email,
         subject: `New Contact Form Submission from ${safeName}`,
-        text: `New contact form submission:\n\nName: ${safeName}\nEmail: ${email}\nPhone: ${safePhone || 'Not provided'}\n\nMessage:\n${message}`,
+        text: `New contact form submission:\n\nName: ${safeName}\nEmail: ${email}\nPhone: ${safePhone || 'Not provided'}\nDate of Birth: ${safeDob || 'Not provided'}\n\nMessage:\n${message}`,
         html: `
           <h2>New Contact Form Submission</h2>
           <table style="border-collapse:collapse;width:100%;max-width:600px;">
             <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Name</td><td style="padding:8px;border-bottom:1px solid #eee;">${esc(safeName)}</td></tr>
             <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Email</td><td style="padding:8px;border-bottom:1px solid #eee;"><a href="mailto:${esc(email)}">${esc(email)}</a></td></tr>
             <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Phone</td><td style="padding:8px;border-bottom:1px solid #eee;">${esc(safePhone || 'Not provided')}</td></tr>
+            <tr><td style="padding:8px;font-weight:bold;border-bottom:1px solid #eee;">Date of Birth</td><td style="padding:8px;border-bottom:1px solid #eee;">${esc(safeDob || 'Not provided')}</td></tr>
           </table>
           <h3 style="margin-top:20px;">Message</h3>
           <p style="white-space:pre-wrap;">${esc(message)}</p>

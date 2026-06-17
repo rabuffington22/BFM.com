@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
       name: form.name.value.trim(),
       email: form.email.value.trim(),
       phone: form.phone.value.trim(),
+      dob: form.dob.value.trim(),
       message: form.message.value.trim(),
     };
 
