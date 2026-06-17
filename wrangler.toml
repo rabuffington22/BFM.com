@@ -10,3 +10,4 @@ routes = [
 
 [assets]
 directory = "."
+binding = "ASSETS"
